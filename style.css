@@ -179,9 +179,36 @@ footer a{
     bottom: 0;
     margin-bottom: 5vh;
     margin-right: 2vw;
-    background: linear-gradient(to left, green, rgb(75, 75, 245), green);
+    background: linear-gradient(45deg, green, rgb(75, 75, 245), green);
     color: white;
-    padding: 2vw 1vw;
+    padding: 1.2vw 1vw;
     border-radius: 100%;
     text-decoration: none;
+}
+#grafico{
+    scale: 0.9;
+    margin-left: -3vw;
+}
+#efeito{
+    color: transparent;
+    text-shadow: none;
+    background: linear-gradient(45deg, #008d23 0% 5%, #ffffff 20% 50%, #008d23 55% 55%, #013b0f 60% 80%, #008d23 95% 100%);
+    animation: degrade 7s linear infinite;
+    animation-delay: 0.2s;
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+
+}
+
+@keyframes degrade {
+    0% {
+        background-position-x: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+}
+.carrossel{
+    
 }

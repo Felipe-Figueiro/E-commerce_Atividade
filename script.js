@@ -52,12 +52,11 @@ function abrirModal() {
     modal.style.display = "flex"
 }
 containerDosCards.addEventListener("click", function (evento) {
-        /**se clicar onde tem btn-comprar */
+    /**se clicar onde tem btn-comprar */
     if (evento.target.classList.contains("btn-comprar")) {
         abrirModal();
     }
-    if (evento.target.classList.contains("btn-carrinho"))
-    {
+    if (evento.target.classList.contains("btn-carrinho")) {
         const cardClicado = evento.target.closest(".card");
         const tituloProduto = cardClicado.querySelector("h2").textContent;
         const precoProduto = cardClicado.querySelector("")
@@ -71,10 +70,50 @@ containerDosCards.addEventListener("click", function (evento) {
 /** fechar*/
 btnFechar.addEventListener("click", fecharModal);
 
-modal.addEventListener("click", function(evento) {
+modal.addEventListener("click", function (evento) {
     /** Só fecha se o clique for NO FUNDO (id="modal")
          e não no conteúdo (class="contmodal")*/
     if (evento.target.id === "modal") {
         fecharModal();
     }
 });
+
+
+
+
+/**
+/// API PARA GRAFICOS DE DADOS não consegui rodar no js, somente no html.
+async function carregadados() {
+    //faz uma requisição a api
+    const resposta = await fetch("https://dummyjson.com/products");
+    // converte os dados de texto para obj
+    const dados = await resposta.json();
+    //pega o titulo em array(map) e nomeia para nomes
+    const nome = dados.products.map(p => p.title);
+    //pega as avaliações também em array e nomeia como aval
+    const aval = dados.products.map(p => p.rating);
+    //
+
+    //monta o gráfico
+    new Chart(document.getElementById("grafico"), {
+        type: 'bar',
+        //geração dos itens dos graficos
+        data: {
+            labels: nome,
+            datasets: [{
+                label: "produtos e avalaiações",
+                data: aval,
+                backgroundcolor: "rgba(54,162,235, 0.6)",
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 5
+                }
+            }
+        }
+    });
+}
+carregadados();       */
