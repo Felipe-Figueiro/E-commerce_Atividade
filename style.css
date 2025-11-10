@@ -1,0 +1,187 @@
+html {
+    scroll-behavior: smooth;
+}
+*{  
+    margin: 0;
+    box-sizing: border-box;
+}
+#produto-card{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1vw;
+    justify-content: space-around;
+    max-width: 95vw;
+    margin: 7vh 8vw;
+justify-items: center;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(248, 253, 252);
+    justify-content: center;
+    align-items: center;
+
+}
+.card{
+    background-color: rgb(220, 252, 241);
+    border-radius: 10px;
+    width:250px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    justify-items: space-between;
+    transition: transform 0.12s;
+    padding-bottom: 1vh;
+}
+.card:hover{
+    transform: scale(1.02);
+    cursor: pointer;
+}
+.card img{
+    width: 100%;
+    height: 240px;
+    object-fit: fill;
+
+}
+.card h2{
+    min-height: 4vh;
+    max-height: 4vh;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+.card p{
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    height: 50px;
+    color: rgb(87, 87, 87);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+.price{
+    font-weight: bold;
+    color: greenyellow;
+    text-shadow: 1px 1px 4px rgb(0, 0, 0);
+}
+.rating{
+    font-weight: bold;
+    color: yellow;
+    text-shadow: 1px 1px 4px rgb(66, 66, 66);
+}
+.btn-comprar{
+    background: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 195px;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.12s;
+}
+.btn-carrinho{
+    background: rgb(42, 56, 185);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 195px;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.12s;
+}
+.btn-comprar:hover, .btn-carrinho:hover{
+    background:rgb(1, 94, 1) ;
+}
+.header{
+    z-index: 9999;
+    position: fixed;
+    width: 100vw;
+    background: green;
+    top: 0;
+    left: 0;
+    height: 5vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+
+}
+.footer{
+    position: relative;
+    width: 100vw;
+    background: green;
+    bottom: 0;
+    left: 0;
+    height: 5vh;
+    color: white;
+    font-size: medium;
+    text-align: center;
+    align-content: center;
+    font-weight: bold;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  color: white;
+  cursor: pointer;
+}
+#modal{
+    display: none
+}
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.contmodal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 90%; 
+    max-width: 500px; 
+    position: relative;
+    text-align: center;
+}
+.qrcode{
+    width: 30vw;
+    align-self: center;
+}
+.titmodal{
+   font-weight: bold;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+}
+#map { height: 180px; }
+#equipeft{
+    display: inline-block;
+    overflow: none;
+    height: 60vw;
+    border-radius: 10px;
+}
+.flutuante{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 5vh;
+    margin-right: 2vw;
+    background: linear-gradient(to left, green, rgb(75, 75, 245), green);
+    color: white;
+    padding: 2vw 1vw;
+    border-radius: 100%;
+    text-decoration: none;
+}
