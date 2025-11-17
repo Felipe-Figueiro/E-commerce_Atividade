@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (carrinho.length === 0) {
             listaCarrinho.innerHTML = "<p>Seu carrinho está vazio.</p>";
-            calcularSomaTotal(carrinho);
+            calcularSomaTotal(carrinho); // Você pode querer tirar essa linha e deixar só a de baixo
             return;
         }
 
@@ -39,10 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
             listaCarrinho.innerHTML += itemHTML;
         });
 
-        adicionarEventos();
+        // // adicionarEventos(); 
+        
         calcularSomaTotal(carrinho);
     }
-
+// CALCULAR VALORES POR QUANTIDADE
     function calcularSomaTotal(carrinho) {
         const total = carrinho.reduce((soma, item) => {
             return soma + (item.preco * item.quantidade);
@@ -60,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const nomeItem = itemElemento.dataset.nome;
 
             if (target.classList.contains('btn-remover')) {
-                atualizarItem(nomeItem, 0);
+                atualizarItem(nomeItem, 0); // 0 significa remover
             }
             if (target.classList.contains('btn-qtde')) {
                 const acao = target.dataset.acao;
                 if (acao === 'somar') {
-                    atualizarItem(nomeItem, 1);
+                    atualizarItem(nomeItem, 1); // 1 significa somar
                 } else if (acao === 'subtrair') {
-                    atualizarItem(nomeItem, -1);
+                    atualizarItem(nomeItem, -1); // -1 significa subtrair
                 }
             }
         });
@@ -80,19 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (itemIndex === -1) return;
 
-        if (mudancaQuantidade === 0) {
+        if (mudancaQuantidade === 0) { // Remover
             carrinho.splice(itemIndex, 1);
-        } else {
+        } else { // Somar ou Subtrair
             carrinho[itemIndex].quantidade += mudancaQuantidade;
             if (carrinho[itemIndex].quantidade <= 0) {
+                // Garante que se a quantidade for 0 ou menos, o item é removido
                 carrinho.splice(itemIndex, 1);
             }
         }
 
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        carregarItensCarrinho();
+        // Recarregar os itens é a ação correta, pois redesenha a tela
+        carregarItensCarrinho(); 
     }
 
     // --- Carrega tudo quando a página abre ---
+    
+    // // Isso adiciona o "escutador" ao container principal
+    adicionarEventos();
+
+    // Isso carrega os itens pela primeira vez
     carregarItensCarrinho();
 });
