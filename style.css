@@ -8,7 +8,8 @@ html {
 }
 
 #produto-card {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap-reverse;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1vw;
     justify-content: space-around;
@@ -99,6 +100,9 @@ body {
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.12s;
+}
+#btnFecharCarrinho{
+    
 }
 
 .btn-comprar:hover,
@@ -213,7 +217,7 @@ footer a {
     text-decoration: none;
 }
 
-#grafico {
+.grafico {
     scale: 0.9;
     margin-left: -3vw;
 }
@@ -287,6 +291,11 @@ footer a {
     margin-bottom: 20px;
     color: green;
 }
+#dropdown H1{
+    font-size: large;
+    text-wrap-mode: nowrap;
+}
+
 
 .item-carrinho {
     display: flex;
@@ -297,7 +306,23 @@ footer a {
     padding: 15px 0;
     gap: 15px;
 }
-
+#dropdown{
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: none;
+    right: 0;
+    position: absolute;
+    padding: 30px;
+    margin-top: 65vh;
+    margin-right: 2vw;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border: solid, green;
+    border-radius: 30px;
+    width: 30vw;
+    height: 60vh;
+}
 .item-carrinho img {
     width: 100px;
     height: 100px;

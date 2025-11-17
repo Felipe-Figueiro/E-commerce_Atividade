@@ -1,4 +1,4 @@
-fetch("https://dummyjson.com/products")
+fetch("https://dummyjson.com/products?limit=0")
     .then(res => res.json())
     .then(data => {
         const produtos = data.products;
@@ -8,7 +8,7 @@ fetch("https://dummyjson.com/products")
         let cardsHTML = "";
 
         /** LOOP QUE MONTA OS CARDS */
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < produtos.length; i++) {
 
             const produto = produtos[i];
             /**condição para verificar se há item na API */
@@ -41,6 +41,7 @@ fetch("https://dummyjson.com/products")
 const containerDosCards = document.getElementById("produto-card");
 const modal = document.getElementById("modal");
 const btnFechar = document.getElementById("btn-fechar");
+const carrinhomodal = document.getElementById("dropdown")
 
 function fecharModal() {
     modal.style.display = "none"
@@ -48,7 +49,13 @@ function fecharModal() {
 function abrirModal() {
     modal.style.display = "flex"
 }
-
+function abrirModalCarrinho() {
+    carrinhomodal.style.display = "block"
+}
+function fecharCarrinhoModal() {
+    carrinhomodal.style.display = "none"
+}
+btnFecharCarrinho.addEventListener("click", fecharCarrinhoModal);
 // CÓDIGO DOS BOTÕES PARA DO MENU PARA JOGAREM AO CARRINHO E CRIAÇÃO DO LOCALSTORAGE
 containerDosCards.addEventListener("click", function (evento) {
     if (evento.target.classList.contains("btn-comprar")) {
@@ -77,7 +84,11 @@ containerDosCards.addEventListener("click", function (evento) {
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
         console.log("Carrinho atual:", carrinho);
-        alert(`"${tituloProduto}" de R$${precoProduto} foi adicionado ao carrinho!`);
+
+        carregarItensCarrinho();
+        alert(`"${tituloProduto}" (R$ ${precoProduto.toFixed(2)}) foi adicionado ao carrinho!`);
+
+        abrirModalCarrinho()
     }
 });
 
@@ -92,40 +103,109 @@ modal.addEventListener("click", function (evento) {
     }
 });
 
-/**
-/// API PARA GRAFICOS DE DADOS não consegui rodar no js, somente no html.
-async function carregadados() {
-    //faz uma requisição a api
-    const resposta = await fetch("https://dummyjson.com/products");
-    // converte os dados de texto para obj
-    const dados = await resposta.json();
-    //pega o titulo em array(map) e nomeia para nomes
-    const nome = dados.products.map(p => p.title);
-    //pega as avaliações também em array e nomeia como aval
-    const aval = dados.products.map(p => p.rating);
-    //
+// PÁGINA DO CARRINHO CARRINHO
+document.addEventListener('DOMContentLoaded', () => {
 
-    //monta o gráfico
-    new Chart(document.getElementById("grafico"), {
-        type: 'bar',
-        //geração dos itens dos graficos
-        data: {
-            labels: nome,
-            datasets: [{
-                label: "produtos e avalaiações",
-                data: aval,
-                backgroundcolor: "rgba(54,162,235, 0.6)",
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 5
+    const listaCarrinho = document.getElementById('lista-carrinho');
+    const valorTotalElemento = document.getElementById('valor-total');
+    let carrinho = []
+    if (!listaCarrinho || !valorTotalElemento) {
+        return;
+    }
+
+    function carregarItensCarrinho() {
+        listaCarrinho.innerHTML = "";
+        //consultar carrinho no localstorage
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+        if (carrinho.length === 0) {
+            listaCarrinho.innerHTML = "<p>Seu carrinho está vazio.</p>";
+            calcularSomaTotal(carrinho); // Você pode querer tirar essa linha e deixar só a de baixo
+            return;
+        }
+
+        //monta os cards igual do html principal
+        carrinho.forEach(item => {
+            const itemHTML = `
+                <div class="item-carrinho" data-nome="${item.nome}">
+                    <img src="${item.imagem}" alt="${item.nome}">
+                    <div class="info-item">
+                        <h2>${item.nome}</h2>
+                        <p>Preço: R$ ${item.preco.toFixed(2)}</p>
+                    </div>
+                    <div class="controle-quantidade">
+                        <button class="btn-qtde" data-acao="subtrair">-</button>
+                        <span>${item.quantidade}</span>
+                        <button class="btn-qtde" data-acao="somar">+</button>
+                    </div>
+                    <button class="btn-remover">Remover</button>
+                </div>
+            `;
+            listaCarrinho.innerHTML += itemHTML;
+        });
+
+        // // adicionarEventos(); 
+
+        calcularSomaTotal(carrinho);
+    }
+    // CALCULAR VALORES POR QUANTIDADE
+    function calcularSomaTotal(carrinho) {
+        const total = carrinho.reduce((soma, item) => {
+            return soma + (item.preco * item.quantidade);
+        }, 0);
+
+        valorTotalElemento.textContent = `R$ ${total.toFixed(2)}`;
+    }
+
+    function adicionarEventos() {
+        listaCarrinho.addEventListener('click', (evento) => {
+            const target = evento.target;
+            const itemElemento = target.closest('.item-carrinho');
+            if (!itemElemento) return;
+
+            const nomeItem = itemElemento.dataset.nome;
+
+            if (target.classList.contains('btn-remover')) {
+                atualizarItem(nomeItem, 0); // 0 significa remover
+            }
+            if (target.classList.contains('btn-qtde')) {
+                const acao = target.dataset.acao;
+                if (acao === 'somar') {
+                    atualizarItem(nomeItem, 1); // 1 significa somar
+                } else if (acao === 'subtrair') {
+                    atualizarItem(nomeItem, -1); // -1 significa subtrair
                 }
             }
+        });
+    }
+
+    // Função central para ATUALIZAR (somar, subtrair ou remover)
+    function atualizarItem(nome, mudancaQuantidade) {
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const itemIndex = carrinho.findIndex(item => item.nome === nome);
+
+        if (itemIndex === -1) return;
+
+        if (mudancaQuantidade === 0) { // Remover
+            carrinho.splice(itemIndex, 1);
+        } else { // Somar ou Subtrair
+            carrinho[itemIndex].quantidade += mudancaQuantidade;
+            if (carrinho[itemIndex].quantidade <= 0) {
+                // Garante que se a quantidade for 0 ou menos, o item é removido
+                carrinho.splice(itemIndex, 1);
+            }
         }
-    });
-}
-// carregadados();
-*/
+
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        // Recarregar os itens é a ação correta, pois redesenha a tela
+        carregarItensCarrinho();
+    }
+
+    // --- Carrega tudo quando a página abre ---
+
+    // // Isso adiciona o "escutador" ao container principal
+    adicionarEventos();
+
+    // Isso carrega os itens pela primeira vez
+    carregarItensCarrinho();
+});

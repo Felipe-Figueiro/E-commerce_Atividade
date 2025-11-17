@@ -24,8 +24,9 @@
         <a href="carrinho.html"><span class="material-symbols-outlined">shopping_basket</span></a>
     </header>
     <div style="margin-top: 50px;">
-        <h2>Nossos pordutos e avaliações</h2>
-        <canvas id="grafico"></canvas>
+        <h2 style="justify-self: center;">Nossos pordutos e avaliações</h2>
+        <canvas id="grafico" class="grafico"></canvas>
+        <canvas id="grafico2" class="grafico"></canvas>
         <br>
     </div>
     <section style="text-align: center;">
@@ -41,17 +42,41 @@
         /** API PARA GRAFICOS DE DADOS */
         async function carregadados() {
             //faz uma requisição a api
-            const resposta = await fetch("https://dummyjson.com/products");
+            const resposta = await fetch("https://dummyjson.com/products?limit=30");
+            const resposta2 = await fetch("https://dummyjson.com/products?limit=30&skip=30");
             // converte os dados de texto para obj
             const dados = await resposta.json();
+            const dados2 = await resposta2.json();
             //pega o titulo em array(map) e nomeia para nomes
             const nome = dados.products.map(p => p.title);
+            const nome2 = dados2.products.map(p => p.title);
             //pega as avaliações também em array e nomeia como aval
             const aval = dados.products.map(p => p.rating);
+            const aval2 = dados2.products.map(p => p.rating);
             /***************/
 
             //monta o gráfico
             new Chart(document.getElementById("grafico"), {
+                type: 'bar',
+                //geração dos itens dos graficos
+                data: {
+                    labels: nome, aval,
+                    datasets: [{
+                        label: "Avaliação",
+                        data: aval,
+                        backgroundColor: "rgba(0,162,0, 0.6)",
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById("grafico2"), {
                 type: 'bar',
                 //geração dos itens dos graficos
                 data: {

@@ -21,6 +21,20 @@
         <a href="about.html"><span class="material-symbols-outlined">Beenhere</span></a>
         <a href="chat.html"><span class="material-symbols-outlined">chat</span></a>
         <a href="carrinho.html"><span class="material-symbols-outlined">shopping_basket</span></a>
+        <div id="dropdown">
+            <div style="display: flex; align-items: center; gap: 2vw;">
+                <h1>Meu Carrinho</h1>
+                <button id="btnFecharCarrinho" class="btn-comprar">fechar</span></button>
+            </div>
+            <div id="lista-carrinho">
+            </div>
+
+            <div class="soma-total">
+                <h3>Total: <span id="valor-total">R$ 0,00</span></h3>
+                <button class="btn-comprar-final">Finalizar Compra</button>
+            </div>
+        </div>
+
     </header>
     <div class="containerssel">
         <div class="carrossel">
@@ -30,7 +44,7 @@
             <div class="itemcarrossel"><img src="img/promo1.png" alt="promoção"></div>
         </div>
     </div>
-    <div>
+    <div class="cardcontainer">
         <main id="produto-card"></main>
         <br>
     </div>
@@ -46,6 +60,7 @@
         <p>Todos direitos reservados</p>
     </footer>
     <script src="script.js"></script>
+    <script src="carrinho.js"></script>
 </body>
 
 </html>
