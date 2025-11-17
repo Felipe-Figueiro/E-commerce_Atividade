@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOMMERCE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html"><span class="material-symbols-outlined">home</span></a>
+        <a href="dados.html"><span class="material-symbols-outlined">bar_chart</span></a>
+        <a href="about.html"><span class="material-symbols-outlined">Beenhere</span></a>
+        <a href="chat.html"><span class="material-symbols-outlined">chat</span></a>
+        <a href="carrinho.html"><span class="material-symbols-outlined">shopping_basket</span></a>
+    </header>
+    <div class="containerssel">
+        <div class="carrossel">
+            <div class="itemcarrossel"><img src="img/promo1.png" alt="promoção"></div>
+            <div class="itemcarrossel"><img src="img/blackfraude.png" alt="Blackfraude"></div>
+            <div class="itemcarrossel"><img src="img/desconto.png" alt="desconto"></div>
+            <div class="itemcarrossel"><img src="img/promo1.png" alt="promoção"></div>
+        </div>
+    </div>
+    <div>
+        <main id="produto-card"></main>
+        <br>
+    </div>
+    <div id="modal" class="modal">
+        <div class="contmodal">
+            <p class="titmodal">Finalize sua compra!</p>
+            <img class="qrcode" src="img/QRCODE.png" alt="qrcode">
+            <button id="btn-fechar" class="btn-comprar">Fechar</button>
+
+        </div>
+    </div>
+    <footer class="footer">
+        <p>Todos direitos reservados</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
