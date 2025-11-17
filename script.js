@@ -85,7 +85,6 @@ containerDosCards.addEventListener("click", function (evento) {
 
         console.log("Carrinho atual:", carrinho);
 
-        carregarItensCarrinho();
         alert(`"${tituloProduto}" (R$ ${precoProduto.toFixed(2)}) foi adicionado ao carrinho!`);
 
         abrirModalCarrinho()
