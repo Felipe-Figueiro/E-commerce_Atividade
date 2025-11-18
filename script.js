@@ -1,3 +1,42 @@
+/* API RESERVA
+fetch("https://api.escuelajs.co/api/v1/products")
+.then(res => res.json())
+.then(dados => {
+    const produtos = dados; 
+    
+    const container = document.getElementById("produto-card");
+    let cardsHTML = "";
+
+    for (let i = 0; i < produtos.length; i++) {
+        const produto = produtos[i];
+
+        if (produto) {
+            let imagemLimpa = produto.images[0]; 
+            let ratingFalso = (Math.random() * 5).toFixed(1);
+
+            cardsHTML += `
+            <div class="card"> 
+                <img src="${imagemLimpa}" alt="${produto.title}" onerror="this.src='https://placehold.co/250'">
+                
+                <h2>${produto.title}</h2>
+                <p>${produto.description}</p>
+                
+                <div class="price">Preço: R$<a>${produto.price}</a></div>
+                
+                <div class="rating">Avaliações: ${ratingFalso} ⭐</div> 
+                
+                <button class="btn-carrinho">Adicionar ao carrinho</button>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            `;
+        }
+    }
+    container.innerHTML = cardsHTML;
+})
+.catch(error => {
+    console.error("Erro ao carregar produtos", error);
+    document.getElementById("produto-card").innerHTML = "<p>Erro ao carregar produtos</p>";
+}); */
 fetch("https://dummyjson.com/products?limit=0")
     .then(res => res.json())
     .then(data => {
@@ -56,40 +95,9 @@ function fecharCarrinhoModal() {
     carrinhomodal.style.display = "none"
 }
 btnFecharCarrinho.addEventListener("click", fecharCarrinhoModal);
+
+
 // CÓDIGO DOS BOTÕES PARA DO MENU PARA JOGAREM AO CARRINHO E CRIAÇÃO DO LOCALSTORAGE
-containerDosCards.addEventListener("click", function (evento) {
-    if (evento.target.classList.contains("btn-comprar")) {
-        abrirModal();
-    }
-    if (evento.target.classList.contains("btn-carrinho")) {
-        const cardClicado = evento.target.closest(".card");
-        const tituloProduto = cardClicado.querySelector("h2").textContent;
-        const precoProduto = parseFloat(cardClicado.querySelector(".price a").textContent);
-        const imgProduto = cardClicado.querySelector("img").src;
-
-        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-        const itemExistente = carrinho.find(item => item.nome === tituloProduto);
-
-        if (itemExistente) {
-            itemExistente.quantidade++;
-        } else {
-            const produtoAdicionado = {
-                nome: tituloProduto,
-                preco: precoProduto,
-                imagem: imgProduto,
-                quantidade: 1
-            };
-            carrinho.push(produtoAdicionado);
-        }
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-        console.log("Carrinho atual:", carrinho);
-
-        alert(`"${tituloProduto}" (R$ ${precoProduto.toFixed(2)}) foi adicionado ao carrinho!`);
-
-        abrirModalCarrinho()
-    }
-});
 
 /** fechar modal comprar*/
 btnFechar.addEventListener("click", fecharModal);
@@ -207,4 +215,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Isso carrega os itens pela primeira vez
     carregarItensCarrinho();
+    containerDosCards.addEventListener("click", function (evento) {
+        if (evento.target.classList.contains("btn-comprar")) {
+            abrirModal();
+        }
+        if (evento.target.classList.contains("btn-carrinho")) {
+            const cardClicado = evento.target.closest(".card");
+            const tituloProduto = cardClicado.querySelector("h2").textContent;
+            const precoProduto = parseFloat(cardClicado.querySelector(".price a").textContent);
+            const imgProduto = cardClicado.querySelector("img").src;
+
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            const itemExistente = carrinho.find(item => item.nome === tituloProduto);
+
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                const produtoAdicionado = {
+                    nome: tituloProduto,
+                    preco: precoProduto,
+                    imagem: imgProduto,
+                    quantidade: 1
+                };
+                carrinho.push(produtoAdicionado);
+            }
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+            console.log("Carrinho atual:", carrinho);
+
+            alert(`"${tituloProduto}" (R$ ${precoProduto.toFixed(2)}) foi adicionado ao carrinho!`);
+            abrirModalCarrinho()
+            carregarItensCarrinho()
+        }
+
+    });
+
 });
