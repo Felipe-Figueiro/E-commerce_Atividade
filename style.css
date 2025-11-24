@@ -298,10 +298,6 @@ footer a {
     width: 9vw;
 }
 
-#btncarrinho:hover .dropdown {
-    display: flex;
-}
-
 .dropdown {
     position: absolute;
     right: 0;
@@ -318,7 +314,7 @@ footer a {
     width: 40vw;
     height: 60vh;
 }
-#dropdown H1 {
+.dropdown H1 {
     font-size: large;
     text-wrap-mode: nowrap;
 }
@@ -389,6 +385,9 @@ footer a {
 }
 
 .soma-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-self: end;
     margin-top: 30px;
     text-align: right;
@@ -396,6 +395,7 @@ footer a {
 }
 
 .btn-comprar-final {
+    text-decoration: none;
     background: green;
     color: white;
     border: none;

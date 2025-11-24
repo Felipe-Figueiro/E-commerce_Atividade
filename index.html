@@ -20,10 +20,12 @@
         <a href="dados.html"><span class="material-symbols-outlined">bar_chart</span></a>
         <a href="about.html"><span class="material-symbols-outlined">Beenhere</span></a>
         <a href="chat.html"><span class="material-symbols-outlined">chat</span></a>
-        <a href="carrinho.html" id="btncarrinho"><span class="material-symbols-outlined">shopping_basket</span>
-            <div class="dropdown">
+        <div id="btncarrinho">
+            <a id="carrin"><span class="material-symbols-outlined">shopping_basket</span>
+            </a>
+            <div class="dropdown" id="dropdown">
                 <div style="display: flex; align-items: center; gap: 2vw;">
-                    <h1>Meu Carrinho</h1>
+                    <h1>Seu Carrinho</h1>
                     <button id="btnFecharCarrinho" class="btn-comprar">fechar</span></button>
                 </div>
                 <div id="lista-carrinho">
@@ -31,11 +33,10 @@
 
                 <div class="soma-total">
                     <h3>Total: <span id="valor-total">R$ 0,00</span></h3>
-                    <button class="btn-comprar-final">Finalizar Compra</button>
+                    <a href="carrinho.html" class="btn-comprar-final">Finalizar Compra</a>
                 </div>
             </div>
-        </a>
-
+        </div>
 
     </header>
     <div class="containerssel">
