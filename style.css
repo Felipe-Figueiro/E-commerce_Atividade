@@ -292,20 +292,35 @@ footer a {
     color: green;
 }
 
-#dropdown H1 {
-    font-size: large;
-    text-wrap-mode: nowrap;
-}
-#btnFecharCarrinho{
+
+#btnFecharCarrinho {
     padding: 0px, 0px;
     width: 9vw;
 }
-#btncarrinho:hover {
-    background-color: #cc0000;
+
+#btncarrinho:hover .dropdown {
+    display: flex;
 }
 
-#btncarrinho:hover #dropdown {
-    display: flex;
+.dropdown {
+    position: absolute;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    overflow-y: none;
+    overflow-x: none;
+    padding: 2vw;
+    justify-content: start;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border: solid, green;
+    border-radius: 30px;
+    width: 40vw;
+    height: 60vh;
+}
+#dropdown H1 {
+    font-size: large;
+    text-wrap-mode: nowrap;
 }
 
 .item-carrinho {
@@ -317,25 +332,6 @@ footer a {
     padding: 15px 0;
     gap: 15px;
 }
-
-#dropdown {
-    display: flex;
-    flex-direction: column;
-    overflow-y: none;
-    overflow-x: none;
-    right: 0;
-    position: absolute;
-    padding: 2vw;
-    margin: 1vw;
-    justify-content: start;
-    align-items: center;
-    background-color: rgb(255, 255, 255);
-    border: solid, green;
-    border-radius: 30px;
-    width: 40vw;
-    height: 60vh;
-}
-
 .item-carrinho img {
     width: 100px;
     height: 100px;

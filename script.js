@@ -1,42 +1,4 @@
-/* API RESERVA
-fetch("https://api.escuelajs.co/api/v1/products")
-.then(res => res.json())
-.then(dados => {
-    const produtos = dados; 
-    
-    const container = document.getElementById("produto-card");
-    let cardsHTML = "";
 
-    for (let i = 0; i < produtos.length; i++) {
-        const produto = produtos[i];
-
-        if (produto) {
-            let imagemLimpa = produto.images[0]; 
-            let ratingFalso = (Math.random() * 5).toFixed(1);
-
-            cardsHTML += `
-            <div class="card"> 
-                <img src="${imagemLimpa}" alt="${produto.title}" onerror="this.src='https://placehold.co/250'">
-                
-                <h2>${produto.title}</h2>
-                <p>${produto.description}</p>
-                
-                <div class="price">Preço: R$<a>${produto.price}</a></div>
-                
-                <div class="rating">Avaliações: ${ratingFalso} ⭐</div> 
-                
-                <button class="btn-carrinho">Adicionar ao carrinho</button>
-                <button class="btn-comprar">Comprar</button>
-            </div>
-            `;
-        }
-    }
-    container.innerHTML = cardsHTML;
-})
-.catch(error => {
-    console.error("Erro ao carregar produtos", error);
-    document.getElementById("produto-card").innerHTML = "<p>Erro ao carregar produtos</p>";
-}); */
 fetch("https://dummyjson.com/products?limit=0")
     .then(res => res.json())
     .then(data => {
