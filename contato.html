@@ -30,38 +30,46 @@
         <a href="carrinho.html"><span class="material-symbols-outlined">shopping_basket</span></a>
     </header>
 
-    <section style="margin-top: 70px; margin-bottom: 40px;">
-        <div style="justify-items: center">
-            <br>
-            <p>Entenda porque a Loja R<b>API</b>10 é Diferente:</p>
-            <br>
-            <p>Sabemos como é difícil encontrar produtos de qualidade e com preço justo. Nossa missão é fazer essa
-                curadoria para você, entregando apenas o que usaríamos em nossa própria casa.</p>
-            <br>
-            <p>Cada produto no nosso catálogo foi testado e aprovado pessoalmente por nossa equipe.</p>
-            <br>
-            <p>Comprando até as 14h, seu pedido sai no mesmo dia.</p>
+    <br><br><br>
 
-            <div style="margin-top: 20px; justify-items: center;">
-                <p>nossa equipe</p>
-                <img id="equipeft" src="img/equipe.png" alt="Equipe">
-                <br>
-                <p>Visite-nos</p>
-                <div id="map" style="margin-top: 20px ;"></div>
-                <script>
-                    var map = L.map('map').setView([-30.064495, -51.183372], 14.2);
-                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
-                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map);
-                    var marker = L.marker([-30.064495, -51.183372]).addTo(map);
-                    marker.bindPopup("Nossa loja").openPopup();
-                </script>
-            </div>
+    <div style="text-align: center;">
+        <div>
+            <H1>Entre em contato com nossa equipe!</H1>
         </div>
-    </section>
+        <form id="cadastro" action="/submit_form" method="post">
+            <label for="pais">Motivo do contato</label>
+            <select name="pais" id="pais">
+                <option value="sup">Suporte</option>
+                <option value="sugs">Sugestão</option>
+                <option value="feed">Elogio/Reclamação</option>
+            </select>
+            <br><br>
+            <p>
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" required placeholder="Ex: Nome e sobrenome">
+            </p>
+            <br>
+            <p>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@dominio.com" required>
+            </p>
+            <br>
+            <p>
+                <label for="mensagem">Mensagem</label><br>
+                <textarea id="mensagem" name="mensagem" rows="10" cols="50" placeholder="Escreva sua mensagem aqui..." required></textarea>
+            <br>
+            <label for="foto"></label>
+            <p>Prints ou imagens do contexto</p>
+            <input type="file" name="foto" id="foto" accept="image/*">
+            </p>
+            <br>
+            <button type="submit">Enviar</button>
+            <button type="reset">Limpar</button>
+            <br>
+        </form>
+    </div>
 
-    <footer class="footer">
+    <footer class="footer" style="bottom: 0;">
         <p>Todos direitos reservados</p>
     </footer>
     <script src="script.js"></script>
